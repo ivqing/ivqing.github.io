@@ -1,14 +1,18 @@
 var c = document.getElementById("wall");
 var cxt = c.getContext("2d");
 var s = document.getElementById("score");
-var score = 0;
-var time = 160 ; // speed
+
 var snake_width = 20;
-var x = snake_width;
-var y = snake_width;
-var snake_length = 2;
-var route = []; 
-var direction = 'right';
+function init() {
+	score = 0;
+	x = snake_width;
+	y = snake_width;
+	snake_length = 2;
+	route = []; 
+	direction = 'right';
+}
+init();
+var time = 160 ; // speed
 var color = ['blue', 'yellow', 'cyan', 'yellow', 'silver', 'green', 'yellow', 'purple', 'yellow']
 
 rand_food();
@@ -21,16 +25,31 @@ function game(){
 		case 'left':x = x-snake_width;break;
 		case 'down':y = y+snake_width;break;
 	}
+
+	function clear() {
+		cxt.clearRect(food_position_x, food_position_y, snake_width, snake_width);
+		for (var i=0; i<route.length; i++) {
+			var x = route[i]['x'];
+			var y = route[i]['y'];
+			cxt.clearRect(x, y,  snake_width, snake_width);
+		}
+	}
+
 	// margin check
 	if(x>400 || y>200 || x<0 || y<0){
-		window.location.reload();
+		clear();
+		init();
+		rand_food();
 	}
 	// eating self check
 	for(var i=0;i<route.length;i++){
 		if( parseInt(route[i].x)==x && parseInt(route[i].y)==y){
-			window.location.reload();
-		}
+			clear();
+			init();
+			rand_food();
+	s}
 	}
+
 	//draw snake
 	if (route.length>snake_length) { 
 		var cl = route.shift(); 
