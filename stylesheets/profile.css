@@ -101,7 +101,8 @@ hr {
 }
 .game-container {
 	float: right;
-	display: inline;
+	width: 400px;
+	height: 300px;
 }
 .game-container p {
 	text-align: center;
