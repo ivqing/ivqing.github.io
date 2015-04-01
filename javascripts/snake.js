@@ -19,7 +19,7 @@ rand_food();
 window.setInterval(game, time);
 
 function game(){
-	switch(direction){
+	witch(direction){
 		case 'up':y = y-snake_width;break;
 		case 'right':x = x+snake_width;break;
 		case 'left':x = x-snake_width;break;
@@ -50,6 +50,14 @@ function game(){
 	s}
 	}
 
+	// eat food
+	if((food_position_x)==x && (food_position_y)==y){ 
+		snake_length++;
+		rand_food();
+		score += 1;
+	}
+	s.innerHTML = score;
+
 	//draw snake
 	if (route.length>snake_length) { 
 		var cl = route.shift(); 
@@ -59,13 +67,7 @@ function game(){
 	cxt.fillStyle = "#006699";
 	cxt.strokeStyle = "#006699";
 	cxt.fillRect(x, y, snake_width, snake_width);
-	// eat food
-	if((food_position_x)==x && (food_position_y)==y){ 
-		snake_length++;
-		rand_food();
-		score += 1;
-	}
-	s.innerHTML = score;
+
 }
 // keyboard_input_control
 document.onkeydown = function(e) {
@@ -78,17 +80,26 @@ document.onkeydown = function(e) {
 	}
 }
 
+function inArray(obj, arr) {
+	var i = arr.length;
+	while(i --) {
+		if (arr[i] === obj) {
+			return true;
+		}
+	}
+	return false;
+}
 function rand_food(){
 	var i = Math.ceil(Math.random()*10);
 	food_color = color[i];
-	food_position_x = Math.ceil(Math.random()*(400/snake_width))*snake_width;
-	food_position_y = Math.ceil(Math.random()*(200/snake_width))*snake_width;
 	cxt.fillStyle = food_color;
 	cxt.strokeStyle = food_color;
-	while (route.indexOf([food_position_x, food_position_y]) != -1) { // on the body
-		food_position_x = Math.ceil(Math.random()*(400/snake_width))*snake_width;
-		food_position_y = Math.ceil(Math.random()*(200/snake_width))*snake_width;
-		}
+	food_position_x = Math.floor(Math.random()*((400/snake_width)))*snake_width;
+	food_position_y = Math.floor(Math.random()*((200/snake_width)))*snake_width;
+	if (inArray([food_position_x, food_position_y], route)) {// on the body
+		food_position_x = Math.floor(Math.random()*((400/snake_width)))*snake_width;
+		food_position_y = Math.floor(Math.random()*((200/snake_width)))*snake_width;
+	}
 	cxt.fillRect(food_position_x, food_position_y, snake_width, snake_width);
 }
 
