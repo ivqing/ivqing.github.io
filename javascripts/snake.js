@@ -9,7 +9,7 @@ var y = snake_width;
 var snake_length = 2;
 var route = []; 
 var direction = 'right';
-var color = ['blue', 'yellow', 'cyan', 'yellow', 'siver', 'green', 'yellow', 'purple', 'yellow']
+var color = ['blue', 'yellow', 'cyan', 'yellow', 'silver', 'green', 'yellow', 'purple', 'yellow']
 
 rand_food();
 window.setInterval(game, time);
