@@ -19,7 +19,7 @@ rand_food();
 window.setInterval(game, time);
 
 function game(){
-	witch(direction){
+	switch(direction){
 		case 'up':y = y-snake_width;break;
 		case 'right':x = x+snake_width;break;
 		case 'left':x = x-snake_width;break;
